@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">ProyectoDam</string>
+
+    <string name="perfil">Perfil</string>
+    <string name="tests">Lista de tests</string>
+    <string name="videos">Videos</string>
+    <string name="contacto">Contacto</string>
+    <string name="logout">Cerrar sesión</string>
+
+
+
 </resources>

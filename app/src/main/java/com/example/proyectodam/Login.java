@@ -105,7 +105,7 @@ public class Login extends AppCompatActivity {
                         }
                         else{
                             preferencias.eliminarPreferencias();
-                            Log.v(TAG, "ERROOOOOO "+task.getException().toString() );}}});}
+                            Log.v(TAG, "Error: "+task.getException().toString() );}}});}
 
 
     private void init() {
