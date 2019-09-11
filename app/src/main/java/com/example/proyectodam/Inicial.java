@@ -57,9 +57,6 @@ public class Inicial extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
     }
 
 
