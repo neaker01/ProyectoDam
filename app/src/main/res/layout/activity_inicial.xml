@@ -7,42 +7,74 @@
     tools:context=".Inicial">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btPerfil"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="180dp"
         android:text="@string/perfil"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="158dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btLista"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/btLista"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/tests"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="161dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btPerfil"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
+        android:id="@+id/btVideos"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="@string/videos"
-        tools:layout_editor_absoluteX="58dp"
-        tools:layout_editor_absoluteY="266dp" />
+        app:layout_constraintEnd_toStartOf="@+id/btContacto"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btPerfil" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:id="@+id/btContacto"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:text="@string/contacto"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="266dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btVideos"
+        app:layout_constraintTop_toBottomOf="@+id/btLista" />
 
     <Button
         android:id="@+id/btLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/logout"
-        tools:layout_editor_absoluteX="143dp"
-        tools:layout_editor_absoluteY="506dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="599dp" />
+
 </android.support.constraint.ConstraintLayout>
