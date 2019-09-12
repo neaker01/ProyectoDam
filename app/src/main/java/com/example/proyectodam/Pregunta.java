@@ -73,12 +73,11 @@ public class Pregunta implements Parcelable {
 
     public void setResponder(String r){
         setRespondida();
-        for (String res:
-             respuestas){
+        acertada = true;
                 if (r.equals(respuestaCorrecta)){
                       acertada = true;
                 }
-        }
+
     }
 
     public boolean isRespondida() {
