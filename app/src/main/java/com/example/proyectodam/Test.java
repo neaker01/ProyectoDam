@@ -69,8 +69,10 @@ public class Test implements Parcelable {
                 respondidas++;
             }
         }
-        if (respondidas > 0)
-        this.respondido = true;
+        if (respondidas > 0) {
+            this.respondido = true;
+            setAprobado();
+        }
     }
 
 
