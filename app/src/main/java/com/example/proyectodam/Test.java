@@ -1,8 +1,13 @@
 package com.example.proyectodam;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 
-public class Test {
+
+
+//Rellenar el parcelable
+public class Test implements Parcelable {
 
     private int id;
     private  Pregunta[] preguntas;
@@ -24,6 +29,16 @@ public class Test {
         this.id = id;
         this.preguntas = preguntas;
         this.respondido = respondido;
+    }
+
+
+    protected Test(Parcel in) {
+        id = in.readInt();
+        preguntas = in.createTypedArray(Pregunta.CREATOR);
+        respondido = in.readByte() != 0;
+        aprobado = in.readByte() != 0;
+        aciertos = in.readInt();
+        fallos = in.readInt();
     }
 
 
@@ -105,4 +120,35 @@ public class Test {
                 '}';
     }
 
+
+
+
+    public static final Creator<Test> CREATOR = new Creator<Test>() {
+        @Override
+        public Test createFromParcel(Parcel in) {
+            return new Test(in);
+        }
+
+        @Override
+        public Test[] newArray(int size) {
+            return new Test[size];
+        }
+    };
+
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeTypedArray(preguntas, flags);
+        dest.writeByte((byte) (respondido ? 1 : 0));
+        dest.writeByte((byte) (aprobado ? 1 : 0));
+        dest.writeInt(aciertos);
+        dest.writeInt(fallos);
+    }
 }
