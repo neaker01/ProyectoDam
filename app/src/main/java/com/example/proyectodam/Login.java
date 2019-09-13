@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,8 +72,13 @@ public class Login extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         fbUser = autentificador.getCurrentUser();
                                         preferencias.guardarPreferencias(txUser.getText().toString(), txPass.getText().toString());
-                                        Intent i = new Intent(Login.this, Inicial.class);
-                                        startActivity(i);
+                                        if (txUser.getText().toString().contains("Admin")){
+                                            Intent i = new Intent(Login.this, MenuAdministrador.class);
+                                            startActivity(i);
+                                        }else {
+                                            Intent i = new Intent(Login.this, Inicial.class);
+                                            startActivity(i);
+                                        }
                                     } else {
                                         Toast.makeText(Login.this, "Fallo autentificacion", Toast.LENGTH_SHORT).show();
 

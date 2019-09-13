@@ -31,7 +31,6 @@ public class Pregunta implements Parcelable {
         this.respuestaCorrecta = respuestaCorrecta;this.respondida = false;
         this.respondida = false;
         this.acertada = false;
-
     }
 
     protected Pregunta(Parcel in) {

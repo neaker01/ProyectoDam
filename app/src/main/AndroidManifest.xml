@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Tests"></activity>
+        <activity android:name=".MenuAdministrador"></activity>
+        <activity android:name=".CrearTest" />
+        <activity android:name=".Tests" />
         <activity android:name=".Perfil" />
         <activity android:name=".Inicial" />
         <activity android:name=".Login">
