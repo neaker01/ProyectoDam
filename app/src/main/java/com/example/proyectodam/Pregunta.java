@@ -3,6 +3,8 @@ package com.example.proyectodam;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 //Rellenar el parcelable
@@ -133,4 +135,21 @@ public class Pregunta implements Parcelable {
         dest.writeByte((byte) (respondida ? 1 : 0));
         dest.writeByte((byte) (acertada ? 1 : 0));
     }
+
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put( "id", id );
+        result.put( "pegunta", pegunta );
+       // result.put("respuestas", respuestas);
+        for(int i = 0; i < respuestas.length; i++){
+                result.put("respuesta " +i+1+ "", respuestas[i]);
+        }
+
+        result.put("respuestaCorrecta", respuestaCorrecta);
+        result.put("respondida", respondida);
+        result.put("acertada", acertada);
+        return result;
+    }
+
 }
