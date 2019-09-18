@@ -3,6 +3,7 @@ package com.example.proyectodam;
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,15 +11,27 @@ import java.util.Map;
 //Rellenar el parcelable
 public class Test implements Parcelable {
 
-
-
     private int id;
+    private String categoria;
     private String key;
     private  Pregunta[] preguntas;
     private boolean respondido;
     private boolean aprobado;
     private int aciertos;
     private int fallos;
+    private Date fecha; // añadir fecha de realizacion y categoria del test
+
+
+    public Test() {
+        this.id = 0;
+        this.respondido = false;
+        this.aprobado = false;
+        this.aciertos=0;
+        this.fallos=0;
+
+
+
+    }
 
     public Test(int id, Pregunta[] preguntas, boolean respondido, boolean setAprobado, int aciertos, int fallos) {
         this.id = id;
@@ -81,15 +94,20 @@ public class Test implements Parcelable {
         this.preguntas = preguntas;
     }
 
-    public void setAprobado() {
-        boolean aprobado = true;
-        for (Pregunta pregunta:
-                preguntas) {
-            if (!pregunta.isRespondida() || !pregunta.isAcertada()){
-                aprobado = false;
-            }
+    public void setCalificar() {
+        this.aprobado = false;
+
+        if (this.respondido){
+        if (getFallos() <= 3){
+            this.aprobado = true;
         }
-       this.aprobado = aprobado;
+        }
+
+    }
+
+    public boolean getAprobado() {
+    return aprobado;
+
     }
 
     public void setRespondido() {
@@ -102,7 +120,7 @@ public class Test implements Parcelable {
         }
         if (respondidas > 0) {
             this.respondido = true;
-            setAprobado();
+            setCalificar();
         }
     }
 

@@ -70,6 +70,13 @@ public class Login extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
+
+
+                                        System.out.println("NOMBRE USUARIOO " +autentificador.getCurrentUser().getDisplayName());
+
+
+                                        System.out.println("EMAIL USUARIOO " +autentificador.getCurrentUser().getEmail());
+
                                         fbUser = autentificador.getCurrentUser();
                                         preferencias.guardarPreferencias(txUser.getText().toString(), txPass.getText().toString());
                                         if (txUser.getText().toString().contains("Admin")){

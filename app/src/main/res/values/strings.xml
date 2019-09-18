@@ -6,9 +6,15 @@
     <string name="videos">Videos</string>
     <string name="contacto">Contacto</string>
     <string name="logout">Cerrar sesión</string>
-
-
     <string name="crear">Crear test </string>
+
+    <string name="num_test">Nº test </string>
+    <string name="respondido">Realizado </string>
+    <string name="aprobado">Aprobado  </string>
+    <string name="fallos">Fallos  </string>
+    <string name="aciertos">Aciertos  </string>
+
+    <string name="fecha">Fecha de realizacion  </string>
 
 
 </resources>

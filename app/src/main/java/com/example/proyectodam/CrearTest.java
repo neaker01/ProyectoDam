@@ -78,60 +78,48 @@ public class CrearTest extends AppCompatActivity {
 
             Toast.makeText(this, "Debe rellenar todos los campos", Toast.LENGTH_SHORT).show();
 
-
-
         } else {
-
             System.out.println();
-
             String correcta = "";
 
-            int numCorrecta = Integer.parseInt(txCorrecta.getText().toString());
+            try {
+                int numCorrecta = Integer.parseInt(txCorrecta.getText().toString());
 
-            if(numCorrecta == 1){
-                correcta = txRespuesta1.getText().toString();
-            }else if(numCorrecta == 2){
-                correcta = txRespuesta2.getText().toString();
-            }else if(numCorrecta == 3){
-                correcta = txRespuesta3.getText().toString();
-            }
+                if (numCorrecta == 1) {
+                    correcta = txRespuesta1.getText().toString();
+                } else if (numCorrecta == 2) {
+                    correcta = txRespuesta2.getText().toString();
+                } else if (numCorrecta == 3) {
+                    correcta = txRespuesta3.getText().toString();
+                }
+                Pregunta pregunta = new Pregunta(txPregunta.getText().toString(),
+                        new String[]{txRespuesta1.getText().toString(), txRespuesta2.getText().toString(),
+                                txRespuesta3.getText().toString()}, correcta);
 
-            Pregunta pregunta = new Pregunta(txPregunta.getText().toString(),
-                    new String[] {txRespuesta1.getText().toString() , txRespuesta2.getText().toString(),
-                            txRespuesta3.getText().toString() }, correcta);
-
-            if (preguntas.size() < 10){
-                //if (comprobarPreguntaRepetida(pregunta)) {
+                if (preguntas.size() < 10) {
+                    //if (comprobarPreguntaRepetida(pregunta)) {
                     pregunta.setId(preguntas.size() + 1);
                     preguntas.add(pregunta);
-
-
-                //}else{
+                    //}else{
                     Toast.makeText(this, "Esa pregunta ya está guardada", Toast.LENGTH_SHORT).show();
 
-              //  }
-
-
-
-             //   borrarTextos();
-
-
-
-            }else{
-                Toast.makeText(this, "El test ya contiene todas las preguntas, puede guardarlo", Toast.LENGTH_SHORT).show();
+                    //  }
+                    //   borrarTextos();
+                } else {
+                    Toast.makeText(this, "El test ya contiene todas las preguntas, puede guardarlo", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (NumberFormatException ex){
+                Toast.makeText(this, "El numero de la respuesta correcta debe estar entre 1 y 3", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     public void guardarTest(){
-
         Pregunta[] lista = new Pregunta[preguntas.size()];
-
         for (int i = 0; i < preguntas.size(); i++){
             lista[i] = preguntas.get(i);
         }
-
-
 
         Test test = new Test(lista, false);
         Map<String, Object> saveItem = new HashMap<>();
@@ -150,36 +138,29 @@ public class CrearTest extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        meterPreguntas(keyFinal, testFinal.getPreguntas());
+                        meterPreguntas(keyFinal, testFinal.getPreguntas()); // Cada test tiene un array de preguntas que hay que introducir desde otro metodo
                        // gestor.add(lugar);
                         Log.v("save", "save: " + task.isSuccessful());
                         System.out.println("SE HA GUARDADOOO");
                         preguntas = new ArrayList<>();
 
-
-
                         //Intent i = new Intent();
                        // setResult(GUARDADO, i);
                        // finish();
-
-
                     }
 
 
                 });
-
 
     }
 
     public void meterPreguntas(String key, Pregunta[] preguntas){
 
         for (Pregunta p: preguntas) {
-
-
             Map<String, Object> saveItem = new HashMap<>();
             String key2 = dbReference.child("plantillas/"+key).push().getKey();
             System.out.println("LA KEY EN LA INSERCION: " + key);
-            saveItem.put("plantillas/"+key+"/"+key2 + "/pregunta/", p.toMap());
+            saveItem.put("plantillas/"+key+"/"+key2, p.toMap());
 
             dbReference.updateChildren(saveItem)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -191,12 +172,7 @@ public class CrearTest extends AppCompatActivity {
 
 
                     });
-
-
-
         }
-
-
 
     }
 
