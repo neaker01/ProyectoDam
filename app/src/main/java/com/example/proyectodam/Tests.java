@@ -41,20 +41,18 @@ public class Tests extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tests);
 
 
-        dbRef= FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference();
         FirebaseApp.initializeApp(this);
-        autentificador =  FirebaseAuth.getInstance();
+        autentificador = FirebaseAuth.getInstance();
         usuario = autentificador.getCurrentUser();
 
         preferencias = new Preferencias(getApplicationContext());
-
         getTests();
 
         usuario = autentificador.getCurrentUser();
@@ -62,46 +60,83 @@ public class Tests extends AppCompatActivity {
         this.container = (ConstraintLayout) findViewById(R.id.contenedor);
         this.recyclerLugares = (RecyclerView) findViewById(R.id.recyclerLista);
 
-      //  setAdapter(listaTest);
-       // lymanager = new LinearLayoutManager(this);
-       // recyclerLugares.setLayoutManager(lymanager);
+        //  setAdapter(listaTest);
+        // lymanager = new LinearLayoutManager(this);
+        // recyclerLugares.setLayoutManager(lymanager);
 
+    }
+
+    public void getTests() {
+
+        if (autentificador.getCurrentUser().getEmail().toString().contains("admin")) {
+            getTestAdmin();
+
+        } else {
+            getTestUsuarios();
+        }
 
 
     }
 
-public void getTests(){
-            listaTest = new ArrayList<>();
-            if (autentificador.getCurrentUser().getEmail().toString().contains("admin")){
 
-            }
+    public void getTestAdmin() {
+        listaTest = new ArrayList<>();
 
-            dbRef.child("plantillas").addValueEventListener(new ValueEventListener() {
+       // String key = dbRef.child("plantillas").getKey();
+      //  System.out.println("KEY KE SACA " +key+"/");
+      //  System.out.println("DONDE BUSCA: plantillas/"+key+"/");
+
+
+        dbRef.child("/plantillas/").
+            addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void onDataChange (@NonNull DataSnapshot dataSnapshot){
 
-                        if (dataSnapshot.exists()){
+                    if (dataSnapshot.exists()) {
 
-                            for (DataSnapshot ds: dataSnapshot.getChildren()){
-                                System.out.println("NODO " + ds.toString());
+            int cont = 0;
 
-                            }
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                                String key = ds.getKey();
+                    cont++;
+
+                            System.out.println("PREGUNTA " +cont);
+
+
+                            Test t;
+
+                            t = ds.getValue(Test.class);
+
+                            System.out.println("ESTE TEST ES " +t);
+
+
+                            System.out.println("SALIDA "+ds.toString());
+                            System.out.println("BUSCA EN " +""+key+"/respuestaCorrecta");
+
+
+                            String nombre = (String) ds.child(""+key+"/respuestaCorrecta").getValue();
+
+                            System.out.println("RESPUESTAA "+nombre);
+
+                           // listaTest.add()
+
+
+
+
                         }
+                    }
 
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                public void onCancelled (@NonNull DatabaseError databaseError){
 
                 }
             });
+}
 
-
-                }
-
-
-
-
+public void getTestUsuarios(){}
 
 
 

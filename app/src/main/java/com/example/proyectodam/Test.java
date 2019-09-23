@@ -146,7 +146,7 @@ public class Test implements Parcelable {
         return respondido;
     }
 
-    public boolean isAprobado() {
+    public boolean aprobado() {
         return aprobado;
     }
 

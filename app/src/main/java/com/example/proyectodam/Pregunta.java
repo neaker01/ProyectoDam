@@ -26,6 +26,13 @@ public class Pregunta implements Parcelable {
         this.acertada = false;
     }
 
+
+    public Pregunta() {
+
+    }
+
+
+
     public Pregunta(String pegunta, String[] respuestas, String respuestaCorrecta) {
         this.id = id;
         this.pegunta = pegunta;

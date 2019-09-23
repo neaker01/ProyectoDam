@@ -138,7 +138,8 @@ public class CrearTest extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        meterPreguntas(keyFinal, testFinal.getPreguntas()); // Cada test tiene un array de preguntas que hay que introducir desde otro metodo
+                        meterPreguntas(keyFinal, testFinal.getPreguntas()); // Cada test tiene un array de preguntas que
+                                                                            // hay que introducir desde otro metodo
                        // gestor.add(lugar);
                         Log.v("save", "save: " + task.isSuccessful());
                         System.out.println("SE HA GUARDADOOO");
@@ -159,8 +160,12 @@ public class CrearTest extends AppCompatActivity {
         for (Pregunta p: preguntas) {
             Map<String, Object> saveItem = new HashMap<>();
             String key2 = dbReference.child("plantillas/"+key).push().getKey();
+
             System.out.println("LA KEY EN LA INSERCION: " + key);
+
             saveItem.put("plantillas/"+key+"/"+key2, p.toMap());
+
+            System.out.println("LA KEY ES: " +key+ "/y la dos: " +key2);
 
             dbReference.updateChildren(saveItem)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
