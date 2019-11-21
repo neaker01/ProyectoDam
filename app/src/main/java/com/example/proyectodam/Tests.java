@@ -16,6 +16,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,20 +68,16 @@ public class Tests extends AppCompatActivity {
     }
 
     public void getTests() {
-
         if (autentificador.getCurrentUser().getEmail().toString().contains("admin")) {
             getTestAdmin();
 
         } else {
             getTestUsuarios();
         }
-
-
     }
 
 
     public void getTestAdmin() {
-        listaTest = new ArrayList<>();
 
        // String key = dbRef.child("plantillas").getKey();
       //  System.out.println("KEY KE SACA " +key+"/");
@@ -93,38 +90,27 @@ public class Tests extends AppCompatActivity {
                 public void onDataChange (@NonNull DataSnapshot dataSnapshot){
 
                     if (dataSnapshot.exists()) {
-
-            int cont = 0;
+                        int cont = 0;
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                                String key = ds.getKey();
-                    cont++;
-
+                            for (DataSnapshot dsNap : ds.getChildren()) {
+                                String key = dsNap.getKey();
+                                cont++;
                             System.out.println("PREGUNTA " +cont);
+                            Pregunta pregunt;
+                                pregunt = (Pregunta) dsNap.getValue(Pregunta.class);
+                                System.out.println("PREGUNTa " +pregunt);
 
 
-                            Test t;
-
-                            t = ds.getValue(Test.class);
-
-                            System.out.println("ESTE TEST ES " +t);
-
-
+                           // System.out.println("ESTE TEST ES " +t);
                             System.out.println("SALIDA "+ds.toString());
                             System.out.println("BUSCA EN " +""+key+"/respuestaCorrecta");
 
-
                             String nombre = (String) ds.child(""+key+"/respuestaCorrecta").getValue();
-
                             System.out.println("RESPUESTAA "+nombre);
 
-                           // listaTest.add()
-
-
-
-
-                        }
+                         //   listaTest.add(null);
+                        }}
                     }
 
                 }
